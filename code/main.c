@@ -8,6 +8,8 @@ char *id;
 int main() {
     while (!(id=signinup())) {} // 성공적으로 sign in 할때까지 반복
 
+    
+
     return 0;
 }
 
