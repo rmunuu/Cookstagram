@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "dirent.h"
-#include "print.c"
+#include "print.h"
 
 char *signinup();
 char *get_str();
@@ -17,7 +17,6 @@ int check_password(char *id, char *password);
 char *signinup() { // sign in 성공 시 id 반환, 실패 or sign up 시 NULL 반환
     int choice = 0;
     while (!choice) {
-        // printf("sign in[1]/sign up[2]/exit[-1]: ");
         refresh_print("sign in[1]/sign up[2]/exit[-1]: ");
         scanf("%d", &choice);
         int c;
