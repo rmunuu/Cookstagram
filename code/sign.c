@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "dirent.h"
-#include "print.h"
+#include "./headers/dirent.h"
+#include "./headers/print.h"
 
 char *signinup();
 char *get_str();
@@ -36,6 +36,7 @@ char *signinup() { // sign in 성공 시 id 반환, 실패 or sign up 시 NULL �
             return NULL;
         }
     }
+    return NULL;
 }
 
 char *get_str() { // 최대 길이 30, \n 제거해서 입력 문자열 반환

@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "global_var.h": "c",
+        "dirent.h": "c",
+        "print.h": "c"
+    }
+}
