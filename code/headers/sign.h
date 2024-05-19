@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "dirent.h"
-#include "print.h"
+#include <dirent.h>
+#include "basic_funcs.h"
 
 char *signinup();
 char *get_str();

@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "./headers/print.c"
-#include "./headers/sign.c"
+#include "./headers/basic_funcs.h"
+#include "./headers/sign.h"
 
 int main() {
     printf("Hello, World!\n");

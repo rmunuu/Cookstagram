@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "./headers/dirent.h"
-#include "./headers/print.h"
+#include <dirent.h>
+#include "./headers/basic_funcs.h"
 
 char *signinup();
 char *get_str();
@@ -14,7 +14,8 @@ int check_password(char *id, char *password);
 
 // 각 input 에서 예외상황 check 필요
 
-char *signinup() { // sign in 성공 시 id 반환, 실패 or sign up 시 NULL 반환
+// sign in 성공 시 id 반환, 실패 or sign up 시 NULL 반환
+char *signinup() {
     int choice = 0;
     while (!choice) {
         refresh_print("sign in[1]/sign up[2]/exit[-1]: ");
@@ -39,7 +40,8 @@ char *signinup() { // sign in 성공 시 id 반환, 실패 or sign up 시 NULL �
     return NULL;
 }
 
-char *get_str() { // 최대 길이 30, \n 제거해서 입력 문자열 반환
+// 최대 길이 30, \n 제거해서 입력 문자열 반환
+char *get_str() {
     char str[31];
 
     if (!fgets(str, 31, stdin)) {
@@ -71,7 +73,8 @@ char *get_str() { // 최대 길이 30, \n 제거해서 입력 문자열 반환
     return buffer;
 }
 
-char *signin() { // sign in 성공 시 id 반환, 실패 시 NULL 반환
+// sign in 성공 시 id 반환, 실패 시 NULL 반환
+char *signin() {
     char *id;
     char *password;
     printf("id: ");
@@ -101,7 +104,8 @@ char *signin() { // sign in 성공 시 id 반환, 실패 시 NULL 반환
     }
 }
 
-void signup() { // id 중복체크, id, password 입력받아 파일에 저장
+// id 중복체크, id, password 입력받아 파일에 저장
+void signup() {
     char *id;
     char *password;
     FILE *stream;
@@ -139,7 +143,8 @@ void signup() { // id 중복체크, id, password 입력받아 파일에 저장
     fclose(stream);
 }
 
-char **get_filenames(const char *directory, int *count) { // 디렉토리 내 파일 이름들 배열, 배열 길이 반환
+// 디렉토리 내 파일 이름들 배열, 배열 길이 반환
+char **get_filenames(const char *directory, int *count) {
     DIR *dir;
     struct dirent *entry;
     char **filenames = NULL;
@@ -194,7 +199,8 @@ char **get_filenames(const char *directory, int *count) { // 디렉토리 내 �
     return filenames;
 }
 
-int check_id(char *id) { // id 존재하는지 체크(있으면 1, 없으면 0 return)
+// id 존재하는지 체크(있으면 1, 없으면 0 return)
+int check_id(char *id) {
     int id_num = 0;
     char **id_list = get_filenames("../data/personal_info", &id_num);
 
@@ -210,7 +216,8 @@ int check_id(char *id) { // id 존재하는지 체크(있으면 1, 없으면 0 r
     return 0;
 }
 
-int check_password(char *id, char *password) { // id 파일 찾아서 password 일치하는지 체크(맞으면 1, 틀리면 0 return)
+// id 파일 찾아서 password 일치하는지 체크(맞으면 1, 틀리면 0 return)
+int check_password(char *id, char *password) {
     char filename[100];
     sprintf(filename, "../data/personal_info/%s.txt", id);
 

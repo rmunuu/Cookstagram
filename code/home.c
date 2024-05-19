@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "./headers/print.h"
+#include "./headers/basic_funcs.h"
 
 int home();
 

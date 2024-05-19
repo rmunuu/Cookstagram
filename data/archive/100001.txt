@@ -1,0 +1,25 @@
+[Title]
+hello
+
+[Author]
+213
+
+[Likes]
+0
+
+[Ingredients]
+rice(10g)
+
+[Instructions]
+
+
+[Tags]
+
+[Comments]
+
+[Referenced Recipes]
+
+[Recipes Referencing This]
+
+[Unique Code]
+100001
