@@ -19,7 +19,7 @@
 # OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # # Default target
-# all: $(TARGET)
+# all: $(TARGET) 
 
 # # Link object files to create the executable
 # $(TARGET): $(OBJDIR) $(OBJS)
