@@ -10,6 +10,7 @@
 void to_lower_case(char *str);
 char *trim_whitespace(char *str);
 void refresh_print(const char *format, ...);
+void get_command(char *str);
 
 // 소문자로 변환하는 함수
 void to_lower_case(char *str) {
@@ -55,4 +56,18 @@ void refresh_print(const char *format, ...) {
 
     // Optionally, flush the output to ensure it appears immediately
     fflush(stdout);
+}
+
+void get_command(char *str) {
+    while (1) {
+        if (getch() != ':') {
+            printf("\r\033[K%s", "");
+            fflush(stdout);
+            continue;
+        } else {
+            printf(":");
+            scanf("%s", str);
+            break;
+        }
+    }
 }

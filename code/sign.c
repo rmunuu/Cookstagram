@@ -18,7 +18,7 @@ int check_password(char *id, char *password);
 char *signinup() {
     int choice = 0;
     while (!choice) {
-        refresh_print("sign in[1]/sign up[2]/exit[-1]: ");
+        refresh_print("sign in\t[1]\nsign up\t[2]\nexit\t[-1]\n");
         scanf("%d", &choice);
         int c;
         while ((c = getchar()) != '\n' && c != EOF); // 입력에서 뒤에 \n 같은거 제거
@@ -26,10 +26,10 @@ char *signinup() {
             printf("exit program\n"); // 프로그램 종료
             exit(0);
         } else if (choice == 1) { // sign in
-            printf("sign in\n");
+            printf("=== sign in ===\n");
             return signin();
         } else if (choice == 2) { // sign up
-            printf("sign up\n");
+            printf("=== sign up ===\n");
             signup();
             return NULL;
         } else {
