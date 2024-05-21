@@ -244,7 +244,7 @@ void display_recipe_feed() {
 
             // Clear the screen before reprinting
             refresh_print("");
-            fflush(stdin);
+            //fflush(stdout);
         }
 
         for (int i = 0; i < lineCount; i++) {

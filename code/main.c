@@ -6,14 +6,16 @@
 #include "./headers/global_vars.h"
 #include "./headers/basic_funcs.h"
 #include "./headers/feed.h"
+#include "./headers/recommend.h"
 
 int main() {
     while (!(id=signinup())) {} // 성공적으로 sign in 할때까지 반복
 
-    int ret;
-    ret = home();
     // printf("%d\n", ret);
-    switch (ret) {
+    while(1)
+    {
+    ret = home();
+    switch (ret) { 
         case 1:
             display_recipe_feed();
             break;
@@ -27,8 +29,7 @@ int main() {
             // recommend();
             break;
     }
-    
-
+    }
     return 0;
 }
 

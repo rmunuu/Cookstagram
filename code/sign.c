@@ -237,7 +237,7 @@ int check_password(char *id, char *password) {
 
     int len = strlen(pwd);
     if (pwd[len - 1] == '\n') {
-        pwd[len - 1] = '\0';
+        pwd[len - 1] = '\0';  
     }
 
     if (strcmp(pwd, password) == 0) {
