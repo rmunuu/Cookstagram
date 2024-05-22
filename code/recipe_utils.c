@@ -252,15 +252,27 @@ void read_recipe_from_file(const char *code, RECIPE *recipe) {
     fgets(buffer, sizeof(buffer), file); // Skip [Tags]
     fgets(buffer, sizeof(buffer), file); 
 
+    int pass = 0;
+
+    if (strcmp(buffer, "\n") == 0) {
+        pass = 1;
+    } 
+
     token = strtok(buffer, ",");
-    while (token != NULL) {
-        token[strcspn(token, "\n")] = 0; // Remove newline character
-        addto_darray(&recipe->tag, strdup(trim_whitespace(token)));
-        token = strtok(NULL, ",");
+    if (pass == 0) {
+        while (token != NULL) {
+            token[strcspn(token, "\n")] = 0; // Remove newline character
+            addto_darray(&recipe->tag, strdup(trim_whitespace(token)));
+            token = strtok(NULL, ",");
+        }
     }
 
+
     // Comments
-    fgets(buffer, sizeof(buffer), file); // Skip empty line
+    if (pass == 0) {
+        fgets(buffer, sizeof(buffer), file); // Skip empty line
+    }
+
     fgets(buffer, sizeof(buffer), file); // Skip [Comments]
     while (fgets(buffer, sizeof(buffer), file) != NULL && strcmp(buffer, "\n") != 0) {
         buffer[strcspn(buffer, "\n")] = 0; // Remove newline character
@@ -269,28 +281,49 @@ void read_recipe_from_file(const char *code, RECIPE *recipe) {
 
     // Referenced recipes
     fgets(buffer, sizeof(buffer), file); // Skip [Referenced Recipes]
-    fgets(buffer, sizeof(buffer), file); 
+    fgets(buffer, sizeof(buffer), file);  
 
-    token = strtok(buffer, ", ");
-    while (token != NULL) {
-        token[strcspn(token, "\n")] = 0; // Remove newline character
-        addto_darray(&recipe->refer, strdup(token));
-        token = strtok(NULL, ", ");
-    }
+    pass = 0;
+
+    if (strcmp(buffer, "\n") == 0) {
+        pass = 1;
+    } 
+
+    if (pass == 0) {
+        token = strtok(buffer, ", ");
+        while (token != NULL) {
+            token[strcspn(token, "\n")] = 0; // Remove newline character
+            addto_darray(&recipe->refer, strdup(token));
+            token = strtok(NULL, ", ");
+        }
+    } 
 
     // Referenced by recipes
-    fgets(buffer, sizeof(buffer), file); // Skip empty line
+    if (pass == 0) {
+        fgets(buffer, sizeof(buffer), file); // Skip empty line
+    } 
     fgets(buffer, sizeof(buffer), file); // Skip [Recipes Referencing This]
     fgets(buffer, sizeof(buffer), file);
+
+    pass = 0;
+
+    if (strcmp(buffer, "\n") == 0) {
+        pass = 1;
+    } 
+
     token = strtok(buffer, ", ");
-    while (token != NULL) {
-        token[strcspn(token, "\n")] = 0; // Remove newline character
-        addto_darray(&recipe->refered, strdup(token));
-        token = strtok(NULL, ", ");
+    if (pass == 0) {
+        while (token != NULL) {
+            token[strcspn(token, "\n")] = 0; // Remove newline character
+            addto_darray(&recipe->refered, strdup(token));
+            token = strtok(NULL, ", ");
+        }
     }
 
     // Code
-    fgets(buffer, sizeof(buffer), file); // Skip empty line
+    if (pass == 0) {
+        fgets(buffer, sizeof(buffer), file); // Skip empty line
+    }
     fgets(buffer, sizeof(buffer), file); // Skip [Unique Code]
     fgets(buffer, sizeof(buffer), file);
     buffer[strcspn(buffer, "\n")] = 0; // Remove newline character

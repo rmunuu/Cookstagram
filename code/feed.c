@@ -206,6 +206,7 @@ void display_recipe_feed() {
 
             printf("[q]uit, [u]p, [d]own, [c]omment, [r]andom\n");
 
+            fflush(stdin);
             char input = getch();
             if (input == 'g' && !likePressed) {
                 recipe->likes++;
@@ -214,6 +215,7 @@ void display_recipe_feed() {
                 lineCount = 0; 
                 store_lines_feed(lines, &lineCount, recipe);
             } else if (input == 'c') {
+                // 인풋 버퍼?
                 printf("Enter your comment: ");
                 char comment[256];
                 fgets(comment, 256, stdin);
@@ -247,10 +249,13 @@ void display_recipe_feed() {
             fflush(stdin);
         }
 
+        printf("flag1");
         for (int i = 0; i < lineCount; i++) {
             free(lines[i]);
         }
+        printf("flag");
         free_recipe(&rec);
+        printf("flag2");
     }
     
 }

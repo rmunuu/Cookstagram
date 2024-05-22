@@ -103,7 +103,7 @@ void addto_darray(darray *array, char *item) {
     array->count++;
     array->arr = realloc(array->arr, array->count * sizeof(char *));
     array->arr[array->count - 1] = item;
-} 
+}
 
 // 동적 배열 해제 함수
 void free_darray(darray *array) {
@@ -203,7 +203,7 @@ void free_recipe(RECIPE *recipe) {
 f_darray return_nutrient(char* name) {
     const int MAX_LINE_LENGTH = 256; 
     const int NUM_NUTRIENTS = 7;
-    FILE *file = fopen("data/nutrient_data.csv", "r");
+    FILE *file = fopen("../data/nutrient_data.csv", "r");
     f_darray result;
     result.arr = NULL;
     result.count = NUM_NUTRIENTS;
