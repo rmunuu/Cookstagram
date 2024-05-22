@@ -43,7 +43,7 @@ int is_code_in_public_txt(const char *code) {
     return 0;
 } 
 
-// 코드 처리 함수
+// 고유코드 처리 함수
 char *get_code(const char *input) {
     FILE *file;
     char **codes = NULL;
@@ -188,7 +188,7 @@ void display_recipe_feed() {
         int commentIndex = recipe->comments.count; // New comment index
         int pageIndex = 0;
 
-        char *lines[1024]; // Assuming the total number of lines will not exceed 1024
+        char *lines[1024]; // 최대 한줄 길이 1024
         int lineCount = 0; 
 
         store_lines_feed(lines, &lineCount, recipe);
@@ -204,7 +204,7 @@ void display_recipe_feed() {
                 printf("%s\n", lines[i]);
             }
 
-            printf("[press q to exit, press u or d to change page, press a to change recipe, press c to leave a comment!]\n");
+            printf("[q]uit, [u]p, [d]own, [c]omment, [r]andom\n");
 
             char input = getch();
             if (input == 'g' && !likePressed) {
@@ -230,7 +230,7 @@ void display_recipe_feed() {
                 check_q = 'q'; 
                 refresh_print("");
                 break;
-            } else if (input == 'a') { // a를 누르면 다음 레시피로 
+            } else if (input == 'r') { // r를 누르면 다음 레시피로 
                 refresh_print("");
                 break;
             } else if (input == 's' && !savePressed) {

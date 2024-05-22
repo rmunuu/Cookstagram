@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # # Makefile for building the project
 
 # # Compiler
@@ -36,6 +37,8 @@
 
 # .PHONY: all clean
 
+=======
+>>>>>>> de3c7bfba0e69aae5a2d1346590327df2e323bef
 # Compiler
 CC = gcc
 

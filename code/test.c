@@ -1,23 +1,29 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 
-#include "./headers/basic_funcs.h"
-#include "./headers/sign.h"
+void get_command(char *str);
 
 int main() {
-    printf("Hello, World!\n");
-    scanf("%d", NULL);
-    refresh_print("Hello, World!\n");
-    refresh_print("input : ");
+    char str[100];
 
-    char *str = get_str();
-
-    printf("%s\n", str);
-
-    int num = 0;
-    scanf("%d", &num);
-    refresh_print("%d\n", num);
-
+    printf("hello world\n");
+    get_command(str);
+    printf("Returned str: %s", str);
+    
     return 0;
+}
+
+void get_command(char *str) {
+    while (1) {
+        if (getch() != ':') {
+            printf("\r\033[K%s", "");
+            fflush(stdout);
+            continue;
+        } else {
+            printf(":");
+            scanf("%s", str);
+            break;
+        }
+    }
 }
