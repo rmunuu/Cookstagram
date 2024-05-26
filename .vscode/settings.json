@@ -4,10 +4,7 @@
         "global_var.h": "c",
         "dirent.h": "c",
         "print.h": "c",
-        "basic_funcs.h": "c",
-        "stdlib.h": "c",
-        "global_vars.h": "c",
-        "home.h": "c"
+        "stdio.h": "c"
     },
     "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\gcc.exe"
 }

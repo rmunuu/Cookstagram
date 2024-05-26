@@ -1,0 +1,28 @@
+[Title]
+adffa dfd
+
+[Author]
+dasfadser
+
+[Likes]
+0
+
+[Ingredients]
+rice(10g)
+
+[Instructions]
+1. fasfdf
+
+[Tags]
+
+[Comments]
+
+hello
+hello2
+
+[Referenced Recipes]
+
+[Recipes Referencing This]
+
+[Unique Code]
+12345
