@@ -300,7 +300,6 @@ void read_recipe_from_file(const char *code, RECIPE *recipe) {
         exit(EXIT_FAILURE);
     }
     strcpy(recipe->code, buffer);
-
     fclose(file);
 }
 

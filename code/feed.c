@@ -179,7 +179,7 @@ void display_recipe_feed() {
             break;
         }
         RECIPE rec; 
-        init_recipe(&rec);
+        init_recipe(&rec); 
         RECIPE *recipe = &rec;
         code = get_code("random");
         read_recipe_from_file(code, recipe); 

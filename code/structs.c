@@ -14,12 +14,12 @@ typedef struct {
     int count;
 } f_darray;  
 
-struct ingre { // 재료 구조체 // 재료 구조체의 경우 모든 속성이 동적할당 
+typedef struct ingre { // 재료 구조체 // 재료 구조체의 경우 모든 속성이 동적할당 
     char *name;
     f_darray nutrient;
     float *quantity;
     char *unit;
-};  
+} ingre; 
 
 typedef struct {
     struct ingre **arr;
@@ -187,6 +187,7 @@ void init_recipe(RECIPE *recipe) {
     recipe->title = NULL;
     recipe->username = NULL;
     recipe->code = NULL;
+
 }
 
 // Recipe 구조체 메모리 해제 함수
