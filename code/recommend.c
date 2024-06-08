@@ -545,8 +545,12 @@ void return_public_code(darray* filenames)
 {
     printf("flag2.4");
     int i;
-    FILE *file = fopen("./data/archive/public.txt", "r");
-    filenames->count = 0;
+    FILE *file;
+    file = fopen("../data/archive/public.txt", "r");
+    if (file == NULL) {
+    perror("Failed to open file");
+    return 1;
+    }
     filenames->count = 0;
     printf("flag2.5");
     darray* public_codes;
