@@ -5,7 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <math.h> 
+#include <math.h>
+#include <errno.h> 
 #include "sign.h"
 #include "basic_funcs.h"
 #include "recipe_utils.h"

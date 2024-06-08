@@ -3,11 +3,13 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
+#include <errno.h>
 #include "./headers/sign.h"
 #include "./headers/basic_funcs.h"
 #include "./headers/recipe_utils.h"
 #include "./headers/global_vars.h"
 #include "./headers/structs.h"
+extern int errno;
 
 //recommend에서 입력으로 어떤 종류의 추천으로 입력받을지 확인한다.
 //recommend 내에서 입력받고, 이후 다른 종류의 함수로 이동하여 추천하게 된다.
@@ -123,12 +125,10 @@ increases, and this is determined probabilistically using the exponential distri
 // 크거나 작은 칼로리를 가진 레시피 순으로 정렬하여 출력한다. 
 void sort_calories()
 {
-    printf("flag1");
     int i,j;
     int index,num;
     char input;
     darray* filenames;
-    init_darray(filenames);
     return_public_code(filenames);
     printf("flag2");
     RECIPE** recipes = malloc(sizeof(RECIPE*) * filenames->count);
@@ -545,10 +545,11 @@ void return_public_code(darray* filenames)
 {
     printf("flag2.4");
     int i;
-    FILE *file = fopen("../data/archive/public.txt","r");
+    printf("flag2.5");
+    FILE *file = fopen("../data/archive/public.txt","rt");
     if (file == NULL) {
-    perror("Failed to open file");
-    return 1;
+    printf("file open error: %d\n",errno);
+    exit(-1);
     }
     filenames->count = 0;
     printf("flag2.5");
@@ -570,7 +571,6 @@ void return_public_code(darray* filenames)
                 free(public_codes->arr[i]);
             }
             free(public_codes->arr);
-            return NULL;
         }
         (filenames->count)++;
     }
