@@ -8,7 +8,7 @@ Woojin dfddf
 7
 
 [Ingredients]
-ri ce(1g), pork(400.0gt), beef(200g)
+rice(20g), pork(400.0gt), beef(200g)
 
 [Instructions]
 1. Mix 1 egg yolk with 400mL of milk.
@@ -20,7 +20,7 @@ ri ce(1g), pork(400.0gt), beef(200g)
 7. ffffff
 
 [Tags]
-egg, yo lk, milk, mascarpone, cheese, cocoa, cream, bread, espresso, tiramisu, woojin, christmas
+egg, yolk, milk, mascarpone, cheese, cocoa, cream, bread, espresso, tiramisu, woojin, christmas
 
 [Comments]
 hello?

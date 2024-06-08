@@ -41,7 +41,7 @@ void recommend()
     char command[MAX_LENGTH];
     while(1)
     {   
-        printf("input your options. input \"help\" if you need help.\n");
+        refresh_print("input your options. input \"help\" if you need help.\n");
         scanf(" %s",command);
         if(strcmp(command, ":q") == 0) break;
         if(strcmp(command, "help") == 0) help();
@@ -123,11 +123,14 @@ increases, and this is determined probabilistically using the exponential distri
 // 크거나 작은 칼로리를 가진 레시피 순으로 정렬하여 출력한다. 
 void sort_calories()
 {
+    printf("flag1");
     int i,j;
     int index,num;
     char input;
     darray* filenames;
+    init_darray(filenames);
     return_public_code(filenames);
+    printf("flag2");
     RECIPE** recipes = malloc(sizeof(RECIPE*) * filenames->count);
     float* calories = malloc(sizeof(float) * filenames->count);
     float* argsort = malloc(sizeof(float) * filenames->count);
@@ -153,7 +156,8 @@ void sort_calories()
             }
         }
     }
-    refresh_print("please input options, high calories[h], low calories[l]\n");
+    //refresh해야됨
+    printf("please input options, high calories[h], low calories[l]\n");
     scanf(" %c",&input);
     printf("please input number of index you want from 1 to %d\n",filenames->count);
     scanf("%d",&index);
@@ -401,6 +405,7 @@ void today_menu()
     int index,num,counter,i,j,temp_count,check;
     char input;
     darray* filenames;
+    init_darray(filenames);
     char option[100];
     return_public_code(filenames);
     counter = filenames->count;
@@ -538,29 +543,35 @@ void return_all_code(darray* filenames)
 //public 코드만 가져온다.
 void return_public_code(darray* filenames)
 {
+    printf("flag2.4");
     int i;
-    FILE *file;
-    char **public_codes = malloc(sizeof(char*) * 100);
-    char buffer[20];
-    if (public_codes == NULL) perror("error");    
-    file = fopen("../data/archive/public.txt", "r");
+    FILE *file = fopen("./data/archive/public.txt", "r");
     filenames->count = 0;
+    filenames->count = 0;
+    printf("flag2.5");
+    darray* public_codes;
+    printf("flag2.6");
+    //init_darray(public_codes);
+    printf("flag2.7");
+    char buffer[20];
+    printf("flag3");    
+    
     while (fgets(buffer, 20, file) != NULL) 
     {
-        buffer[strcspn(buffer, "\n")] = '\0';
-        public_codes[filenames->count] = strdup(buffer);
-        if (public_codes[filenames->count] == NULL) {
+        buffer[strcspn(buffer, "\n")] = '\0'; 
+        public_codes->arr[filenames->count] = strdup(buffer);
+        if (public_codes->arr[filenames->count] == NULL) {
             perror("error");
             fclose(file);
             for (i = 0; i < filenames->count; i++) {
-                free(public_codes[i]);
+                free(public_codes->arr[i]);
             }
-            free(public_codes);
+            free(public_codes->arr);
             return NULL;
         }
         (filenames->count)++;
     }
-    filenames->arr = public_codes;
+    filenames->arr = public_codes->arr;
     fclose(file);
 }
 
@@ -599,4 +610,4 @@ void remove_txt_extension(char *filename) {
 }
 
 
-
+ 

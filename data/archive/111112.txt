@@ -6,9 +6,9 @@ Woojin fdfadsfd
 
 [Likes] 
 7
-
+ 
 [Ingredients]
-ri ce(1g), pork(400.0gt), beef(200g)
+rice(1g), pork(400.0gt), beef(100g)
 
 [Instructions]
 1. Mix 1 egg yolk with 400mL of milk.

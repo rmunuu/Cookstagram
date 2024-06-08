@@ -14,6 +14,8 @@
 
 void recommend();
 
+void help();
+
 void sort_calories();
 void calc_calories(RECIPE*, float*);
 void sort_protein();
