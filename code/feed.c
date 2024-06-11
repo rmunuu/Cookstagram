@@ -16,11 +16,6 @@ char *get_code(const char *input);
 void store_lines_feed(char **lines, int *lineCount, RECIPE *recipe);
 void display_recipe_feed();
 
-// int main() {
-//     display_recipe_feed();
-
-//     return 0;
-// }
 
 // 주어진 코드가 public.txt에 있는지 확인
 int is_code_in_public_txt(const char *code) {

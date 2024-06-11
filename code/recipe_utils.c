@@ -522,6 +522,10 @@ void display_recipe_public(RECIPE *recipe) {
 
         printf("[press q to exit and press u or d to change page and press c to leave a comment!]\n");
 
+        // [q]uit [u]p [d]own [c]omment
+
+        fflush(stdin);
+
         char input = getch();
         if (input == 'g' && !like_pressed) {
             recipe->likes++;

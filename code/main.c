@@ -6,6 +6,10 @@
 #include "./headers/global_vars.h"
 #include "./headers/basic_funcs.h"
 #include "./headers/feed.h"
+#include "./headers/search.h"
+#include "./headers/my_page.h"
+#include "./headers/recommend.h"
+
 
 int main() {
     while (!(id=signinup())) {
@@ -21,13 +25,13 @@ int main() {
                 display_recipe_feed();
                 break;
             case 2:
-                // search();
+                search();
                 break;
             case 3:
-                // my_page();
+                my_page();
                 break;
             case 4:
-                // recommend();
+                recommend();
                 break;
             case 0:
                 exit(0);

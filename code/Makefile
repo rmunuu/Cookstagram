@@ -8,7 +8,7 @@ CFLAGS = -Wall -g -Iheaders
 TARGET = my_program
 
 # Source files
-SRCS = basic_funcs.c feed.c global_var.c home.c main.c recipe_utils.c sign.c structs.c
+SRCS = basic_funcs.c feed.c global_var.c home.c main.c my_page.c recipe_utils.c recommend.c search.c sign.c structs.c
 
 # Object files directory
 OBJDIR = obj

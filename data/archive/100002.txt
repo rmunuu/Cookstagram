@@ -8,7 +8,7 @@ Woojin fdfadsfd
 11
 
 [Ingredients]
-ri ce(1g), chili pepper(400.0gt), beef(200g)
+rice(1g), chili pepper(400.0gt), beef(200g)
 
 [Instructions]
 1. Mix 1 egg yolk with 400mL of milk.
@@ -33,4 +33,4 @@ yaho
 22222, 1111112, 123456
 
 [Unique Code]
-111111
+100002

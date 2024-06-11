@@ -14,5 +14,6 @@ void to_lower_case(char *str);
 char *trim_whitespace(char *str);
 void refresh_print(const char *format, ...);
 void get_command(char *str);
+void get_command_c(char *str);
 
 #endif

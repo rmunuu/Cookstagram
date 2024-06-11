@@ -5,19 +5,25 @@ hello
 213
 
 [Likes]
-0
+1
 
 [Ingredients]
 rice(10g)
 
 [Instructions]
-
+1. dfafadfa
 
 [Tags]
 
 [Comments]
+hello
+hello2
+dfd3
+dfd
+dfd
 
 [Referenced Recipes]
+111111
 
 [Recipes Referencing This]
 

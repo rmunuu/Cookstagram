@@ -11,6 +11,7 @@ void to_lower_case(char *str);
 char *trim_whitespace(char *str);
 void refresh_print(const char *format, ...);
 void get_command(char *str);
+void get_command_c(char *str);
 
 // 소문자로 변환하는 함수
 void to_lower_case(char *str) {
@@ -58,6 +59,7 @@ void refresh_print(const char *format, ...) {
     fflush(stdout);
 }
 
+// 문자열 명령어 받기 위한(:feed? 쓸지는 모르겠음)
 void get_command(char *str) {
     while (1) {
         if (getch() != ':') {
@@ -70,4 +72,27 @@ void get_command(char *str) {
             break;
         }
     }
+}
+
+// char 하나짜리 문자 명령어 받기 위한(:q)
+void get_command_c(char *str) {
+    clear_input_buffer();
+    while (1) {
+        if (getch() != ':') {
+            printf("\r\033[K%s", "");
+            fflush(stdout);
+            continue;
+        } else {
+            printf(":");
+            scanf("%c", str);
+            str[1] = 0;
+            break;
+        }
+    }
+    clear_input_buffer();
+}
+
+void clear_input_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }

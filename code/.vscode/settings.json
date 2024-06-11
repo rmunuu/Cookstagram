@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "global_vars.h": "c",
+        "basic_funcs.h": "c"
+    }
+}
