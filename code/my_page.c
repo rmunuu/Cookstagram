@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 #include <conio.h>
 #include "./headers/sign.h"
 #include "./headers/basic_funcs.h"
@@ -11,33 +10,38 @@
 #define MAX_LENGTH 2048
 #define LINES_PER_PAGE 30
 
-
 void my_page();
 void memo();
 int handle_input();
 int modify();
 void replace_line(const char *filename, int line_num, const char *new_line);
 
-
-void my_page() {
+void my_page()
+{
     refresh_print("<MY PAGE>\nMEMOES\t\t  [1]\nMODIFICATION\t  [2]\nHOME\t\t  [0]\nselect mode:");
     int mode;
     scanf("%d", &mode);
     while (getchar() != '\n');
     
-    while (mode < 0 || mode > 2) {
+    while (mode < 0 || mode > 2)
+    {
         printf("Invalid mode\n");
         scanf("%d", &mode);
     }
-    switch (mode) {
+    switch (mode)
+    {
         case 1:
             memo();
             break;
         case 2:
-            while (1) {
-                if (modify()) {
+            while (1)
+            {
+                if (modify())
+                {
                     continue;
-                }else {
+                }
+                else
+                {
                     break;
                 }
             }
@@ -47,13 +51,15 @@ void my_page() {
     }
 }
 
-void memo() {
+void memo()
+{
     char filename[MAX_LENGTH];
     sprintf(filename, "../data/personal_info/%s.txt", id);
 
     FILE *file = fopen(filename, "r");
-    if (!file) {
-        perror("Error opening file");
+    if (!file)
+    {
+        perror("file open error");
         getchar();
         return;
     }
@@ -63,33 +69,38 @@ void memo() {
     int total_lines = 0;
 
     // 파일의 총 라인 수 계산
-    while (fgets(line, sizeof(line), file)) {
+    while (fgets(line, sizeof(line), file))
+    {
         total_lines++;
     }
-
 
     rewind(file);
 
     // 파일의 첫 두 줄을 건너뜁니다.
-    while (line_count < 2 && fgets(line, sizeof(line), file)) {
+    while (line_count < 2 && fgets(line, sizeof(line), file))
+    {
         line_count++;
     }
 
-
     int lines_printed = 0;
-    while (line_count < total_lines) {
+    while (line_count < total_lines)
+    {
         int lines_this_page = 0;
         
         // 현재 페이지에서 최대 LINES_PER_PAGE 줄을 출력합니다.
-        while (lines_this_page < LINES_PER_PAGE && fgets(line, sizeof(line), file)) {
+        while (lines_this_page < LINES_PER_PAGE && fgets(line, sizeof(line), file))
+        {
             int number;
             char string[MAX_LENGTH];
 
             // 정수-문자열 형식으로 파싱합니다.
-            if (sscanf(line, "%d - %[^\n]", &number, string) == 2) {
+            if (sscanf(line, "%d - %[^\n]", &number, string) == 2)
+            {
                 printf("%d - %s\n", number, string);
-            } else {
-                fprintf(stderr, "Failed to parse line %d: %s", line_count + 1, line);
+            }
+            else
+            {
+                fprintf(stderr, "line %d parcing failed: %s", line_count + 1, line);
             }
 
             lines_this_page++;
@@ -98,40 +109,44 @@ void memo() {
         }
 
         // 아직 파일의 끝에 도달하지 않았으면 사용자 입력 대기
-        if (line_count < total_lines) {
-            printf("\nPress Down arrow key to see more...\n");
+        if (line_count < total_lines)
+        {
+            printf("\nPress below arrow to show more...\n");
             while (handle_input() != -1);
-            printf("\033[H\033[J"); // Clear screen
+            printf("\033[H\033[J"); // 화면 지우기
         }
     }
 
-    printf("Enter to exit");
+    printf("Press Enter to exit...");
     getchar();
 
     fclose(file);
 }
 
-
-
-int handle_input() {
+int handle_input()
+{
     char c = getch();
-    if (c == '\033') {
+    if (c == '\033')
+    {
         getch(); 
-        switch (getch()) {
+        switch (getch())
+        {
             case 'A':
-                return 1; //위쪽 화살표 키
+                return 1; // 위쪽 화살표 키
             case 'B':
-                return -1; //아래쪽 화살표 키
+                return -1; // 아래쪽 화살표 키
         }
     }
     return 0;
 }
 
-int modify() {
+int modify()
+{
     char new_password[MAX_LENGTH];
-    printf("new password: ");
-    if (!fgets(new_password, sizeof(new_password), stdin)) {
-        printf("incorrect input");
+    printf("New password: ");
+    if (!fgets(new_password, sizeof(new_password), stdin))
+    {
+        printf("Wrong input");
         return 1;
     }
     new_password[strcspn(new_password, "\n")] = '\0'; // 개행 문자 제거
@@ -139,15 +154,17 @@ int modify() {
     char filename[MAX_LENGTH];
     sprintf(filename, "../data/personal_info/%s.txt", id);
     replace_line(filename, 2, new_password);
-    printf("password changed");
+    printf("Password changed successfully");
     getchar();
     return 0;
 }
 
-void replace_line(const char *filename, int line_num, const char *new_line) {
+void replace_line(const char *filename, int line_num, const char *new_line)
+{
     FILE *file = fopen(filename, "r");
-    if (!file) {
-        perror("Error opening file");
+    if (!file)
+    {
+        perror("file open error");
         return;
     }
 
@@ -155,11 +172,13 @@ void replace_line(const char *filename, int line_num, const char *new_line) {
     int num_lines = 0;
     char buffer[MAX_LENGTH];
 
-    // Read all lines into memory
-    while (fgets(buffer, sizeof(buffer), file)) {
+    // 모든 줄을 메모리에 읽어들임
+    while (fgets(buffer, sizeof(buffer), file))
+    {
         lines[num_lines] = malloc(strlen(buffer) + 1);
-        if (!lines[num_lines]) {
-            perror("Memory allocation error");
+        if (!lines[num_lines])
+        {
+            perror("memory allocation error");
             fclose(file);
             return;
         }
@@ -168,20 +187,24 @@ void replace_line(const char *filename, int line_num, const char *new_line) {
     }
     fclose(file);
 
-    // Replace the specified line
-    if (line_num < 1 || line_num > num_lines) {
-        printf("Line number out of range\n");
-        for (int i = 0; i < num_lines; i++) {
+    // 지정된 줄을 교체함
+    if (line_num < 1 || line_num > num_lines)
+    {
+        printf("Line number overflowed the range\n");
+        for (int i = 0; i < num_lines; i++)
+        {
             free(lines[i]);
         }
         return;
     }
 
     free(lines[line_num - 1]);
-    lines[line_num - 1] = malloc(strlen(new_line) + 2); // +2 for newline and null terminator
-    if (!lines[line_num - 1]) {
-        perror("Memory allocation error");
-        for (int i = 0; i < num_lines; i++) {
+    lines[line_num - 1] = malloc(strlen(new_line) + 2); // +2는 개행 문자와 null 종료 문자
+    if (!lines[line_num - 1])
+    {
+        perror("memory allocation error");
+        for (int i = 0; i < num_lines; i++)
+        {
             free(lines[i]);
         }
         return;
@@ -189,17 +212,20 @@ void replace_line(const char *filename, int line_num, const char *new_line) {
     strcpy(lines[line_num - 1], new_line);
     strcat(lines[line_num - 1], "\n");
 
-    // Write all lines back to the file
+    // 모든 줄을 파일에 다시 씀
     file = fopen(filename, "w");
-    if (!file) {
-        perror("Error opening file");
-        for (int i = 0; i < num_lines; i++) {
+    if (!file)
+    {
+        perror("file open error");
+        for (int i = 0; i < num_lines; i++)
+        {
             free(lines[i]);
         }
         return;
     }
 
-    for (int i = 0; i < num_lines; i++) {
+    for (int i = 0; i < num_lines; i++)
+    {
         fputs(lines[i], file);
         free(lines[i]);
     }

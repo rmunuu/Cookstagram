@@ -1,12 +1,20 @@
-#ifdef SEARCH_H
+#ifndef SEARCH_H
 #define SEARCH_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "./headers/structs.h"
 #include "./headers/recipe_utils.h"
+
+typedef struct 
+{
+    char *text; 
+    darray *tags;
+    darray *ingres;
+    char *code;
+    int orderby;
+} QUERY;
 
 int count_matches(darray *arr, darray *subarr);
 void sort_codes(darray *codes, int *keys);

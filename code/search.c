@@ -6,7 +6,8 @@
 #include "./headers/recipe_utils.h"
 
 // 검색 쿼리 구조체
-typedef struct {
+typedef struct 
+{
     char *text; 
     darray *tags;
     darray *ingres;
@@ -70,7 +71,7 @@ darray *ingre_names - 재료의 이름을 저장할 동적배열의 주소
 void get_ingre_name(ingre_darray ingredients, darray *ingre_names) 
 {
     int i;
-    for(i=0; i<ingredients.count; i++) 
+    for (i=0; i<ingredients.count; i++) 
     {
         addto_darray(ingre_names, ingredients.arr[i]->name);
     }
@@ -91,11 +92,11 @@ int count_matches(darray *arr, darray *subarr)
 {
     int count = 0;
     int i, j;
-    for(i=0; i<arr->count; i++) 
+    for (i=0; i<arr->count; i++) 
     {
-        for(j=0; j<subarr->count; j++) 
+        for (j=0; j<subarr->count; j++) 
         {
-            if(strcmp(arr->arr[i], subarr->arr[j]) == 0) 
+            if (strcmp(arr->arr[i], subarr->arr[j]) == 0) 
             {
                 count++;
             }
@@ -117,11 +118,11 @@ void sort_codes(darray *codes, int *keys)
     int i, j;
     char *temp;
     int temp_key;
-    for(i=0; i<codes->count; i++) 
+    for (i=0; i<codes->count; i++) 
     {
-        for(j=i+1; j<codes->count; j++) 
+        for (j=i+1; j<codes->count; j++) 
         {
-            if(keys[j-1] < keys[j]) 
+            if (keys[j-1] < keys[j]) 
             {
                 temp = codes->arr[j];
                 codes->arr[j] = codes->arr[j-1];
@@ -153,9 +154,9 @@ void split_string(darray *array, const char *string, char key)
     int buffer_length;
     char *copy;
 
-    for(i=0; i<length; i++) 
+    for (i=0; i<length; i++) 
     {
-        if(string[i] != key) 
+        if (string[i] != key) 
         {
             buffer[index] = string[i];
             index++;
@@ -190,7 +191,7 @@ void get_full_code(darray *codes)
     init_darray(codes);
     file = fopen("../data/archive/public.txt", "r");
     char *temp;
-    if(file) 
+    if (file) 
     {
         char line[MAX_LENGTH];
         while (fgets(line, MAX_LENGTH, file)) 
@@ -223,7 +224,7 @@ int *get_likes(darray *codes)
     RECIPE r;
     RECIPE *recipe = &r;
 
-    for(i=0; i<codes->count; i++) 
+    for (i=0; i<codes->count; i++) 
     {
         init_recipe(recipe);
         read_recipe_from_file(codes->arr[i], recipe);
@@ -264,49 +265,61 @@ void split_args(QUERY *query, const char *args)
     init_darray(options);
     split_string(options, args, '/');
 
-    for(i=0; i<(options->count); i++) 
+    for (i=0; i<(options->count); i++) 
     {
-        if(options->arr[i][0] == 't') 
+        if (options->arr[i][0] == 't') 
         {
-            if(options->arr[i][1] == 'e') // text
+            if (options->arr[i][1] == 'e') // text
             {
-                if(strlen(options->arr[i]) > 5)
+                if (strlen(options->arr[i]) > 5)
                 {
                     copy = (char *)malloc(sizeof(char) * (strlen(options->arr[i]+5)+1));
                     strcpy(copy, options->arr[i]+5);
                     query->text = copy;
                 }
-                else query->text = NULL;
+                else 
+                {
+                    query->text = NULL;
+                }
             }
             else // tag
             {
-                if(strlen(options->arr[i]) > 4) {
+                if (strlen(options->arr[i]) > 4) {
                     split_string(query->tags, options->arr[i]+4, '&');
-                    for(j=0; j<query->tags->count; j++) {
+                    for (j=0; j<query->tags->count; j++) {
                         printf("%s ", query->tags->arr[j]);
                     }
                     printf("\n");
                 }
-                else query->tags = NULL;
+                else 
+                {
+                    query->tags = NULL;
+                }
             }
         }
-        else if(options->arr[i][0] == 'i') // ingredient
+        else if (options->arr[i][0] == 'i') // ingredient
         {
-            if(strlen(options->arr[i]) > 11) 
+            if (strlen(options->arr[i]) > 11) 
             {
                 split_string(query->ingres, options->arr[i]+11, '&');
             }
-            else query->ingres = NULL;
+            else 
+            {
+                query->ingres = NULL;
+            }
         }
-        else if(options->arr[i][0] == 'c') // code
+        else if (options->arr[i][0] == 'c') // code
         {
-            if(strlen(options->arr[i]) > 5) 
+            if (strlen(options->arr[i]) > 5) 
             {
                 copy = (char *)malloc(sizeof(char) * (strlen(options->arr[i]+5)+1));
                 strcpy(copy, options->arr[i]+5);
                 query->code = copy;
             }
-            else query->code = NULL;
+            else 
+            {
+                query->code = NULL;
+            }
         }
         else // option
         {
@@ -316,13 +329,13 @@ void split_args(QUERY *query, const char *args)
             2 - ingredient
             */
             query->orderby = 0;
-            if(strlen(options->arr[i]) > 7) 
+            if (strlen(options->arr[i]) > 7) 
             {
-                if(options->arr[i][7] == 't') // tag
+                if (options->arr[i][7] == 't') // tag
                 {
                     query->orderby = 1;
                 }
-                else if(options->arr[i][7] == 'i') // ingredient
+                else if (options->arr[i][7] == 'i') // ingredient
                 {
                     query->orderby = 2;
                 }
@@ -347,10 +360,10 @@ void search_with_text(darray *codes, darray *full_codes, const char *text)
     RECIPE *recipe = &r;
     init_recipe(recipe);
 
-    for(i=0; i<full_codes->count; i++) 
+    for (i=0; i<full_codes->count; i++) 
     {
         read_recipe_from_file(full_codes->arr[i], recipe);
-        if(strstr(recipe->title, text)) 
+        if (strstr(recipe->title, text)) 
         {
             addto_darray(codes, recipe->code);
         }
@@ -378,13 +391,13 @@ int *search_with_tag(darray *codes, darray *full_codes, darray *tags)
     int *matches = (int *)malloc(sizeof(int) * tags->count);
     int index = 0;
     
-    for(i=0; i<full_codes->count; i++) 
+    for (i=0; i<full_codes->count; i++) 
     {
         init_recipe(recipe);
         read_recipe_from_file(full_codes->arr[i], recipe);
         
         match = count_matches(&(recipe->tag), tags);
-        if(match > 0) 
+        if (match > 0) 
         {
             matches[index] = match;
             index++;
@@ -418,7 +431,7 @@ int *search_with_ingredient(darray *codes, darray *full_codes, darray *ingres)
     int *matches = (int *)malloc(sizeof(int) * ingres->count);
     int index = 0;
     
-    for(i=0; i<full_codes->count; i++) 
+    for (i=0; i<full_codes->count; i++) 
     {
         init_recipe(recipe);
         read_recipe_from_file(full_codes->arr[i], recipe);
@@ -427,7 +440,7 @@ int *search_with_ingredient(darray *codes, darray *full_codes, darray *ingres)
         get_ingre_name(recipe->ingre_arr, ingre_names);
 
         match = count_matches(ingre_names, ingres);
-        if(match > 0) 
+        if (match > 0) 
         {
             matches[index] = match;
             index++;
@@ -462,10 +475,16 @@ void select_recipe(darray *codes)
     {
         refresh_print("[q]uit, [u]p, [d]own, [s]elect\n");
         start = pageindex * 30;
-        if(start + 30 < len) end = start +30;
-        else end = len;
+        if (start + 30 < len) 
+        {
+            end = start +30;
+        }
+        else 
+        {
+            end = len;
+        }
 
-        if(len == 0) 
+        if (len == 0) 
         {
             printf("no recipes searched\n");
             printf("press any key to continue\n");
@@ -473,12 +492,12 @@ void select_recipe(darray *codes)
             break;
         }
 
-        for(i=start; i<end; i++) 
+        for (i=start; i<end; i++) 
         {
             init_recipe(recipe);
             read_recipe_from_file(codes->arr[i], recipe);
 
-            if(i == cursor) 
+            if (i == cursor) 
             {
                 printf("> ");
             }
@@ -486,25 +505,25 @@ void select_recipe(darray *codes)
         }
         input = getch();
 
-        if(input == 'd') 
+        if (input == 'd') 
         {
-            if(cursor < len -1) 
+            if (cursor < len -1) 
             {
                 cursor++;
             }
         }
-        if(input == 'u') 
+        if (input == 'u') 
         {
-            if(cursor > 0) 
+            if (cursor > 0) 
             {
                 cursor--;
             }
         }
-        if(input == 'q') 
+        if (input == 'q') 
         {
             break;
         }
-        if(input == 's') 
+        if (input == 's') 
         {
             init_recipe(recipe);
             read_recipe_from_file(codes->arr[cursor], recipe);
@@ -518,7 +537,9 @@ void select_recipe(darray *codes)
 void copy_darray(darray *target, darray *original) {
     init_darray(target);
     int i;
-    for(i=0; i<original->count; i++) {
+
+    for (i=0; i<original->count; i++) 
+    {
         addto_darray(target, original->arr[i]);
     }
 }
@@ -529,7 +550,9 @@ void copy_darray(darray *target, darray *original) {
 */
 void search() {
     getchar();
-    while(1) {
+
+    while(1) 
+    {
         char buffer[300] = "";
         QUERY q;
         QUERY *query = &q;
@@ -552,34 +575,41 @@ void search() {
     
         init_darray(codes);
         refresh_print("search query should be written in the format:\n");
-        printf("text=[]/tag=[]&[]/code=[]/ingredient=[]&[]/option=[like/tag/ingredient].\n");
-        printf("\n---example---\ntext=hello/tag=egg/code=/ingredient=beef&milk/option=like\n\n");
+        printf("text=[]/tag=[]&[]/code=[]/ingredient=[]&[]/option=[like/tag/ingredient].\n\n");
+        printf("---example---\n");
+        printf("text=hello/tag=egg/code=/ingredient=beef&milk/option=like\n\n");
         printf("enter q to quit.\n\n");
         printf("enter your search query: ");
         fgets(buffer, sizeof(buffer), stdin);
 
-        if(strcmp(buffer, "q\n") == 0) {
+        if (strcmp(buffer, "q\n") == 0) 
+        {
             break;
         }
         split_args(query, buffer);
         get_full_code(full_codes);
         
-        if(query->code) {
+        if (query->code) 
+        {
             addto_darray(codes, query->code);
             select_recipe(codes);
             continue;
         }
 
-        if(query->text) {
+        if (query->text) 
+        {
             search_with_text(codes, full_codes, query->text);
             copy_darray(full_codes, codes);
         }        
 
-        if(query->tags) {
+        if (query->tags) 
+        {
             init_darray(codes);
             tag_matches = search_with_tag(codes, full_codes, query->tags);
             copy_darray(full_codes, codes);
-            if(query->ingres) {
+
+            if (query->ingres) 
+            {
                 init_darray(codes);
                 ingredient_matches = search_with_ingredient(codes, full_codes, query->ingres);
                 full_codes = codes;
@@ -587,21 +617,25 @@ void search() {
             }
         }
 
-        else if(query->ingres) {
+        else if (query->ingres) 
+        {
             init_darray(codes);
             ingredient_matches = search_with_ingredient(codes, full_codes, query->ingres);
             copy_darray(full_codes, codes);
         }
 
-        if(query->orderby == 0) {
+        if (query->orderby == 0) 
+        {
             likes = get_likes(codes);
             sort_codes(codes, likes);
         }
         
-        else if(query->orderby == 1) {
+        else if (query->orderby == 1) 
+        {
             sort_codes(codes, tag_matches);
         }
-        else {
+        else 
+        {
             sort_codes(codes, ingredient_matches);
         }
 

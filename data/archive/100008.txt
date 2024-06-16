@@ -1,0 +1,35 @@
+[Title]
+Woojin's Savory Kimchi Fried Rice
+
+[Author]
+woojin2
+
+[Likes]
+50
+
+[Ingredients]
+rice(200g), kimchi(100g), pork(100g), green onion(20g), cooking oil(10g)
+
+[Instructions]
+
+1. Heat 10g of cooking oil in a pan.
+2. Add 100g of diced pork and cook until brown.
+3. Add 100g of chopped kimchi and stir-fry for 5 minutes.
+4. Add 200g of cooked rice and 20g of sliced green onion.
+5. Stir well and serve hot.
+
+[Tags]
+rice, kimchi, pork, green onion, fried rice, woojin, savory
+
+[Comments]
+Best fried rice ever!
+So flavorful.
+
+[Referenced Recipes]
+100004
+
+[Recipes Referencing This]
+222227, 111116, 123460
+
+[Unique Code]
+100008

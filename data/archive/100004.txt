@@ -1,8 +1,8 @@
 [Title]
-dfafdafdaf
+Make Cereal special with soymilk
 
 [Author]
-213
+see real
 
 [Likes]
 0
@@ -16,16 +16,10 @@ rice(1g)
 [Tags]
 
 [Comments]
-addfafdaf
-fdd
-eswd
-
-fuck
-fuck
-jhhiihi
+soymilk wow
 
 [Referenced Recipes]
-100002
+100001, 100002
 
 [Recipes Referencing This]
 

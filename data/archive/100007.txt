@@ -1,0 +1,35 @@
+[Title]
+Woojin's Crispy Pork with Vegetables
+
+[Author]
+woojin
+
+[Likes]
+27
+
+[Ingredients]
+pork(200g), carrot(50g), green onion(30g), salt(5g), cooking oil(10g)
+
+[Instructions]
+
+1. Heat 10g of cooking oil in a pan.
+2. Add 200g of sliced pork and cook until crispy.
+3. Add 50g of julienned carrot and 30g of sliced green onion.
+4. Season with 5g of salt and stir-fry for 5 minutes.
+5. Serve hot and enjoy.
+
+[Tags]
+pork, carrot, green onion, crispy, stir-fry, woojin, lunch
+
+[Comments]
+Perfect for a quick lunch!
+So crispy and delicious.
+
+[Referenced Recipes]
+100003
+
+[Recipes Referencing This]
+222226, 111115, 123459
+
+[Unique Code]
+100007

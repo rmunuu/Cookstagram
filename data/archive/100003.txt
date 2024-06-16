@@ -1,31 +1,31 @@
 [Title]
-dffafd
+The best way to cook salmon
 
 [Author]
-213
+213kg_salmon
 
 [Likes]
-1
+2
 
 [Ingredients]
 rice(10g)
 
 [Instructions]
-1. efqefe
+1. Bake salmon
+2. eat when it is still fresh
+3. enjoy enjoy enjoy
 
 [Tags]
 egg
 
 [Comments]
-dfd
-
-fuck
-fuck
+wwowowowow :D
+I like salmon steak
 
 [Referenced Recipes]
 
 [Recipes Referencing This]
-100001
+100005, 100006
 
 [Unique Code]
 100003

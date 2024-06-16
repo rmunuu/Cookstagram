@@ -1,0 +1,35 @@
+[Title]
+Woojin's Spicy Beef Delight
+
+[Author]
+woojin
+
+[Likes]
+45
+
+[Ingredients]
+beef(200g), chili pepper(50g), garlic(10g), onion(50g), cooking oil(10g)
+
+[Instructions]
+
+1. Heat 10g of cooking oil in a pan.
+2. Add 200g of beef and stir-fry until brown.
+3. Add 50g of chopped chili pepper, 10g of minced garlic, and 50g of sliced onion.
+4. Cook for 5 more minutes until all ingredients are well combined.
+5. Serve hot and enjoy.
+
+[Tags]
+beef, chili pepper, garlic, onion, stir-fry, spicy, woojin, dinner
+
+[Comments]
+Delicious!
+Perfectly spicy.
+
+[Referenced Recipes]
+100001
+
+[Recipes Referencing This]
+222224, 111113, 123457
+
+[Unique Code]
+100005

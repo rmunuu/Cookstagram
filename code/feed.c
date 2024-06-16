@@ -1,3 +1,5 @@
+// gpt 관여 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,19 +18,29 @@ char *get_code(const char *input);
 void store_lines_feed(char **lines, int *lineCount, RECIPE *recipe);
 void display_recipe_feed();
 
+// int main()
+// {
+//     display_recipe_feed();
+
+//     return 0;
+// }
 
 // 주어진 코드가 public.txt에 있는지 확인
-int is_code_in_public_txt(const char *code) {
+int is_code_in_public_txt(const char *code)
+{
     FILE *file = fopen("../data/archive/public.txt", "r");
-    if (!file) {
+    if (!file)
+    {
         printf("Could not open public.txt\n");
         return 0;
     }
 
     char line[MAX_LENGTH];
-    while (fgets(line, MAX_LENGTH, file)) {
+    while (fgets(line, MAX_LENGTH, file))
+    {
         char *trimmed_line = trim_whitespace(line);
-        if (strcmp(trimmed_line, code) == 0) {
+        if (strcmp(trimmed_line, code) == 0)
+        {
             fclose(file);
             return 1;
         }
@@ -39,21 +51,26 @@ int is_code_in_public_txt(const char *code) {
 } 
 
 // 고유코드 처리 함수
-char *get_code(const char *input) {
+char *get_code(const char *input)
+{
     FILE *file;
     char **codes = NULL;
     int code_count = 0;
     char *result_code = NULL;
-
-    if (strcmp(input, "random") == 0) {
+    
+    // random을 입력한 경우 random한 코드를 뽑아서 반환 
+    if (strcmp(input, "random") == 0)
+    {
         file = fopen("../data/archive/public.txt", "r");
-        if (!file) {
+        if (!file)
+        {
             printf("Could not open public.txt\n");
             return NULL;
         }
 
         char line[MAX_LENGTH];
-        while (fgets(line, MAX_LENGTH, file)) {
+        while (fgets(line, MAX_LENGTH, file))
+        {
             codes = realloc(codes, sizeof(char *) * (code_count + 1));
             codes[code_count] = strdup(trim_whitespace(line));
             code_count++;
@@ -61,18 +78,23 @@ char *get_code(const char *input) {
 
         fclose(file);
 
-        if (code_count > 0) {
+        if (code_count > 0)
+        {
             srand(time(NULL));
             int random_index = rand() % code_count;
             result_code = strdup(codes[random_index]);
 
-            for (int i = 0; i < code_count; i++) {
+            for (int i = 0; i < code_count; i++)
+            {
                 free(codes[i]);
             }
             free(codes);
         }
-    } else {
-        if (!is_code_in_public_txt(input)) {
+    }
+    else
+    {
+        if (!is_code_in_public_txt(input))
+        {
             printf("Code not found in public.txt.\n");
             return NULL;
         }
@@ -84,7 +106,8 @@ char *get_code(const char *input) {
 }
 
 // recipe에서 출력할 줄들을 저장하는 배열 만드는 함수, public에서 사용 
-void store_lines_feed(char **lines, int *lineCount, RECIPE *recipe) {
+void store_lines_feed(char **lines, int *lineCount, RECIPE *recipe)
+{
     char buffer[MAX_LENGTH];
 
     // Title and Username
@@ -97,7 +120,8 @@ void store_lines_feed(char **lines, int *lineCount, RECIPE *recipe) {
     lines[(*lineCount)++] = strdup("-----------------------------------------------");
     lines[(*lineCount)++] = strdup("Required ingredients");
     lines[(*lineCount)++] = strdup("");
-    for (int i = 0; i < recipe->ingre_arr.count; i++) {
+    for (int i = 0; i < recipe->ingre_arr.count; i++)
+    {
         struct ingre *ingredient = recipe->ingre_arr.arr[i];
         snprintf(buffer, MAX_LENGTH, "%-30s %10.2f%s", ingredient->name, *ingredient->quantity, ingredient->unit);
         lines[(*lineCount)++] = strdup(buffer);
@@ -107,7 +131,8 @@ void store_lines_feed(char **lines, int *lineCount, RECIPE *recipe) {
     lines[(*lineCount)++] = strdup("-------------------------------------------------");
     lines[(*lineCount)++] = strdup("Cooking instruction");
     lines[(*lineCount)++] = strdup("");
-    for (int i = 0; i < recipe->text.count; i++) {
+    for (int i = 0; i < recipe->text.count; i++)
+    {
         snprintf(buffer, MAX_LENGTH, "%s", recipe->text.arr[i]);
         lines[(*lineCount)++] = strdup(buffer);
     }
@@ -120,10 +145,14 @@ void store_lines_feed(char **lines, int *lineCount, RECIPE *recipe) {
     // Comments
     lines[(*lineCount)++] = strdup("Comments"); 
     lines[(*lineCount)++] = strdup("");
-    if (recipe->comments.count == 0) {
+    if (recipe->comments.count == 0)
+    {
         lines[(*lineCount)++] = strdup("There are no comments yet. Would you like to be the first to leave?");
-    } else {
-        for (int i = 0; i < recipe->comments.count; i++) {
+    }
+    else
+    {
+        for (int i = 0; i < recipe->comments.count; i++)
+        {
             snprintf(buffer, MAX_LENGTH, "%s", recipe->comments.arr[i]);
             lines[(*lineCount)++] = strdup(buffer);
         }
@@ -133,14 +162,16 @@ void store_lines_feed(char **lines, int *lineCount, RECIPE *recipe) {
     // Footer with referenced recipes
     lines[(*lineCount)++] = strdup("------------------------------------------------------------");
     snprintf(buffer, MAX_LENGTH, "Unique Code of Referenced Recipes: ");
-    for (int i = 0; i < recipe->refer.count; i++) {
+    for (int i = 0; i < recipe->refer.count; i++)
+    {
         strcat(buffer, recipe->refer.arr[i]);
         if (i < recipe->refer.count - 1) strcat(buffer, ", ");
     }
     lines[(*lineCount)++] = strdup(buffer);
 
     snprintf(buffer, MAX_LENGTH, "Unique Code of Recipes Referencing This: ");
-    for (int i = 0; i < recipe->refered.count; i++) {
+    for (int i = 0; i < recipe->refered.count; i++)
+    {
         strcat(buffer, recipe->refered.arr[i]);
         if (i < recipe->refered.count - 1) strcat(buffer, ", ");
     }
@@ -154,7 +185,8 @@ void store_lines_feed(char **lines, int *lineCount, RECIPE *recipe) {
     lines[(*lineCount)++] = strdup("Tag");
     lines[(*lineCount)++] = strdup("");
     snprintf(buffer, MAX_LENGTH, "");
-    for (int i = 0; i < recipe->tag.count; i++) {
+    for (int i = 0; i < recipe->tag.count; i++)
+    {
         strcat(buffer, "#");
         strcat(buffer, recipe->tag.arr[i]);
         if (i < recipe->tag.count - 1) strcat(buffer, " ");
@@ -166,11 +198,16 @@ void store_lines_feed(char **lines, int *lineCount, RECIPE *recipe) {
 // store_lines에서 만든 배열로부터 각 줄을 꺼내서 30줄씩 출력하는 함수 
 // g를 누르면 좋아요 추가, c를 누르면 댓글 추가, u & d를 누르면 페이지 전환 , q를 누르면 셀이 모두 지워지면서 함수가 종료됨, A를 누르면 다음 피드로 
 // 전역변수인 id를 매개변수로 받아와야 할듯 
-void display_recipe_feed() {
+void display_recipe_feed()
+{
     char *code;
     char check_q = 'b';
-    while (1) {
-        if (check_q == 'q') {
+    int ch;
+    while ((ch = getchar()) != '\n' && ch != EOF);
+    while (1)
+    {
+        if (check_q == 'q')
+        {
             break;
         }
         RECIPE rec; 
@@ -178,8 +215,8 @@ void display_recipe_feed() {
         RECIPE *recipe = &rec;
         code = get_code("random");
         read_recipe_from_file(code, recipe); 
-        int likePressed = 0;
-        int savePressed = 0;
+        int likePressed = 0; // 좋아요 눌렀는지 여부 
+        int savePressed = 0; // 내 계정에 저장했는지 여부 
         int commentIndex = recipe->comments.count; // New comment index
         int pageIndex = 0;
 
@@ -188,29 +225,34 @@ void display_recipe_feed() {
 
         store_lines_feed(lines, &lineCount, recipe);
         
-        while (1) {
+        while (1)
+        {
             refresh_print("");
 
             int startLine = pageIndex * MAX_LINES;
             int endLine = startLine + MAX_LINES;
             if (endLine > lineCount) endLine = lineCount;
 
-            for (int i = startLine; i < endLine; i++) {
+            for (int i = startLine; i < endLine; i++)
+            {
                 printf("%s\n", lines[i]);
             }
 
-            printf("[q]uit, [u]p, [d]own, [c]omment, [r]andom\n");
+            printf("[q]uit, [u]p, [d]own, [c]omment, [l]ike, [r]andom\n");
 
             fflush(stdin);
             char input = getch();
-            if (input == 'g' && !likePressed) {
+            if (input == 'l' && !likePressed)
+            {
                 recipe->likes++;
-                likePressed = 1;
+                likePressed = 1;    
                 increase_likes(recipe->code);
                 lineCount = 0; 
                 store_lines_feed(lines, &lineCount, recipe);
-            } else if (input == 'c') {
-                // 인풋 버퍼?
+            }
+            else if (input == 'c')
+            {
+                // 인풋 버퍼? 
                 printf("Enter your comment: ");
                 char comment[256];
                 fgets(comment, 256, stdin);
@@ -219,18 +261,28 @@ void display_recipe_feed() {
                 add_comment(recipe->code,comment);
                 lineCount = 0;
                 store_lines_feed(lines, &lineCount, recipe);
-            } else if (input == 'd' && endLine < lineCount) {
+            }
+            else if (input == 'd' && endLine < lineCount)
+            {
                 pageIndex++;
-            } else if (input == 'u' && pageIndex > 0) {
+            }
+            else if (input == 'u' && pageIndex > 0)
+            {
                 pageIndex--;
-            } else if (input == 'q') { // q를 누르면 함수 자체를 탈출
+            }
+            else if (input == 'q') // q를 누르면 함수 자체를 탈출
+            { 
                 check_q = 'q'; 
                 refresh_print("");
                 break;
-            } else if (input == 'r') { // r를 누르면 다음 레시피로 
+            }
+            else if (input == 'r') // r를 누르면 다음 레시피로 
+            { 
                 refresh_print("");
                 break;
-            } else if (input == 's' && !savePressed) {
+            }
+            else if (input == 's' && !savePressed)
+            {
                 savePressed = 1;
                 printf("Enter your memo: ");
                 char memo[256];
@@ -243,16 +295,10 @@ void display_recipe_feed() {
             refresh_print("");
             fflush(stdin);
         }
-
-        printf("flag1");
-        for (int i = 0; i < lineCount; i++) {
+        for (int i = 0; i < lineCount; i++)
+        {
             free(lines[i]);
         }
-        printf("flag");
         free_recipe(&rec);
-        printf("flag2");
     }
-    
 }
-
-

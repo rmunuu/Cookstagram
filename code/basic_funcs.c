@@ -12,16 +12,20 @@ char *trim_whitespace(char *str);
 void refresh_print(const char *format, ...);
 void get_command(char *str);
 void get_command_c(char *str);
+void clear_input_buffer();
 
 // 소문자로 변환하는 함수
-void to_lower_case(char *str) {
-    for (int i = 0; str[i]; i++) {
+void to_lower_case(char *str)
+{
+    for (int i = 0; str[i]; i++)
+    {
         str[i] = tolower((unsigned char)str[i]);
     }
 }  
 
 // 공백 문자 제거 함수
-char *trim_whitespace(char *str) {
+char *trim_whitespace(char *str)
+{
     char *end;
 
     // 선행 공백 제거
@@ -41,7 +45,8 @@ char *trim_whitespace(char *str) {
 }
 
 // 화면 지우고 출력
-void refresh_print(const char *format, ...) {
+void refresh_print(const char *format, ...)
+{
     // Clear the screen and move the cursor to the top-left corner
     printf("\033[2J\033[H");
 
@@ -60,13 +65,18 @@ void refresh_print(const char *format, ...) {
 }
 
 // 문자열 명령어 받기 위한(:feed? 쓸지는 모르겠음)
-void get_command(char *str) {
-    while (1) {
-        if (getch() != ':') {
+void get_command(char *str)
+{
+    while (1)
+    {
+        if (getch() != ':')
+        {
             printf("\r\033[K%s", "");
             fflush(stdout);
             continue;
-        } else {
+        }
+        else
+        {
             printf(":");
             scanf("%s", str);
             break;
@@ -75,14 +85,18 @@ void get_command(char *str) {
 }
 
 // char 하나짜리 문자 명령어 받기 위한(:q)
-void get_command_c(char *str) {
+void get_command_c(char *str)
+{
     clear_input_buffer();
     while (1) {
-        if (getch() != ':') {
+        if (getch() != ':')
+        {
             printf("\r\033[K%s", "");
             fflush(stdout);
             continue;
-        } else {
+        }
+        else
+        {
             printf(":");
             scanf("%c", str);
             str[1] = 0;
@@ -92,7 +106,8 @@ void get_command_c(char *str) {
     clear_input_buffer();
 }
 
-void clear_input_buffer() {
+void clear_input_buffer()
+{
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }

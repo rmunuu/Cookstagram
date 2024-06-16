@@ -2,10 +2,10 @@
 Woojin's Delicious Special Tiramisu
 
 [Author] 
-Woojin fdfadsfd
+woojin
 
 [Likes] 
-11
+13
 
 [Ingredients]
 rice(1g), chili pepper(400.0gt), beef(200g)
@@ -25,12 +25,13 @@ egg, yo lk, milk, mascarpone, cheese, cocoa, cream, bread, espresso, tiramisu, w
 [Comments]
 hello?
 yaho
+nice
 
 [Referenced Recipes]
-1111113, 1111114, 1111112
+100001
 
 [Recipes Referencing This]
-22222, 1111112, 123456
+222223, 111112, 123456
 
 [Unique Code]
 100002

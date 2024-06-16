@@ -1,29 +1,28 @@
 [Title]
-hello
+hello, chicken chicken
 
 [Author]
-213
+Jongwon_Baek
 
 [Likes]
-1
+3
 
 [Ingredients]
 rice(10g)
 
 [Instructions]
-1. dfafadfa
+1. Prepare chicken
+2. Bake chicken
+3. Make espresso and eat with chicken
 
 [Tags]
 
 [Comments]
 hello
-hello2
-dfd3
-dfd
-dfd
+wow
+wow2
 
 [Referenced Recipes]
-111111
 
 [Recipes Referencing This]
 
