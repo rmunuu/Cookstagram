@@ -254,7 +254,7 @@ args - QUERY로 변환할 텍스트
 */
 void split_args(QUERY *query, const char *args) 
 {
-    int i, j;
+    int i;
     char *copy;
 
     init_darray(query->tags);
@@ -286,10 +286,6 @@ void split_args(QUERY *query, const char *args)
             {
                 if (strlen(options->arr[i]) > 4) {
                     split_string(query->tags, options->arr[i]+4, '&');
-                    for (j=0; j<query->tags->count; j++) {
-                        printf("%s ", query->tags->arr[j]);
-                    }
-                    printf("\n");
                 }
                 else 
                 {
@@ -601,7 +597,7 @@ void search() {
             search_with_text(codes, full_codes, query->text);
             copy_darray(full_codes, codes);
         }        
-
+        
         if (query->tags) 
         {
             init_darray(codes);
@@ -612,11 +608,11 @@ void search() {
             {
                 init_darray(codes);
                 ingredient_matches = search_with_ingredient(codes, full_codes, query->ingres);
-                full_codes = codes;
+                copy_darray(full_codes, codes);
+                init_darray(codes);
                 tag_matches = search_with_tag(codes, full_codes, query->tags);
             }
         }
-
         else if (query->ingres) 
         {
             init_darray(codes);
@@ -629,7 +625,6 @@ void search() {
             likes = get_likes(codes);
             sort_codes(codes, likes);
         }
-        
         else if (query->orderby == 1) 
         {
             sort_codes(codes, tag_matches);

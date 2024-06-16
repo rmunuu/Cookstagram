@@ -18,36 +18,42 @@ void replace_line(const char *filename, int line_num, const char *new_line);
 
 void my_page()
 {
-    refresh_print("<MY PAGE>\nMEMOES\t\t  [1]\nMODIFICATION\t  [2]\nHOME\t\t  [0]\nselect mode:");
-    int mode;
-    scanf("%d", &mode);
-    while (getchar() != '\n');
-    
-    while (mode < 0 || mode > 2)
-    {
-        printf("Invalid mode\n");
+    while (1) {
+        refresh_print("<MY PAGE>\nMEMOES\t\t  [1]\nMODIFY_INFOS\t  [2]\nADD_RECIPE\t  [3]\nHOME\t\t  [0]\nselect mode:");
+        int mode;
         scanf("%d", &mode);
-    }
-    switch (mode)
-    {
-        case 1:
-            memo();
-            break;
-        case 2:
-            while (1)
-            {
-                if (modify())
+        while (getchar() != '\n');
+        
+        while (mode < 0 || mode > 3)
+        {
+            printf("Invalid mode\n");
+            scanf("%d", &mode);
+        }
+        switch (mode)
+        {
+            case 1:
+                memo();
+                break;
+            case 2:
+                while (1)
                 {
-                    continue;
+                    if (modify())
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                else
-                {
-                    break;
-                }
-            }
-            break;
-        case 0:
-            break;
+                break;
+            case 3:
+                create_recipe_file();
+                break;
+            case 0:
+                break;
+        }
+        if (!mode) break;
     }
 }
 

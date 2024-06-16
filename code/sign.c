@@ -11,7 +11,6 @@ void signup();
 char **get_filenames(const char *directory, int *count);
 int check_id(char *id);
 int check_password(char *id, char *password);
-void refresh_print(const char *format, ...);
 
 
 // 각 input 에서 예외상황 check 필요
@@ -19,14 +18,14 @@ void refresh_print(const char *format, ...);
 // sign in 성공 시 id 반환, 실패 or sign up 시 NULL 반환
 char *signinup()
 {
-    int choice = 0;
-    while (!choice)
+    int choice = 3;
+    while (choice == 3)
     {
-        refresh_print("sign in\t[1]\nsign up\t[2]\nexit\t[-1]\n");
+        refresh_print("sign in\t[1]\nsign up\t[2]\nexit\t[0]\n");
         scanf("%d", &choice);
         int c;
         while ((c = getchar()) != '\n' && c != EOF); // 입력에서 뒤에 \n 같은거 제거
-        if (choice == -1)
+        if (choice == 0)
         {
             printf("exit program\n"); // 프로그램 종료
             exit(0);
@@ -295,24 +294,4 @@ int check_password(char *id, char *password)
     free(pwd);
     fclose(stream);
     return 0;
-}
-
-// 화면 지우고 출력,  GPT4 도움
-void refresh_print(const char *format, ...)\
-{
-    // Clear the screen and move the cursor to the top-left corner
-    printf("\033[2J\033[H");
-
-    // Start variadic argument processing
-    va_list args;
-    va_start(args, format);
-    
-    // Print the new content using vprintf which accepts a va_list
-    vprintf(format, args);
-
-    // End variadic argument processing
-    va_end(args);
-
-    // Optionally, flush the output to ensure it appears immediately
-    fflush(stdout);
 }

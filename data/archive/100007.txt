@@ -11,7 +11,6 @@ woojin
 pork(200g), carrot(50g), green onion(30g), salt(5g), cooking oil(10g)
 
 [Instructions]
-
 1. Heat 10g of cooking oil in a pan.
 2. Add 200g of sliced pork and cook until crispy.
 3. Add 50g of julienned carrot and 30g of sliced green onion.

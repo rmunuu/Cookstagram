@@ -53,7 +53,7 @@ void increase_likes(char *code);
 // 레시피 파일에서 댓글을 추가하는 함수 
 void add_comment(char *code, const char *new_comment);  
 
-// cod2.txt 파일의 [Recipes Referencing This] 섹션에 code1을 추가하는 함수
+// code2.txt 파일의 [Recipes Referencing This] 섹션에 code1을 추가하는 함수
 void add_code_to_referencing_section(const char *code1, const char *code2); 
 
 // unique_code.txt에서 고유 코드를 읽고 1 증가시켜 반환하는 함수
@@ -1278,4 +1278,6 @@ void create_recipe_file()
 
     fclose(file);
     printf("Recipe file '%s' created successfully.\n", filename);
+
+    save_memo(code, "[MY RECIPE]");
 }

@@ -1,0 +1,25 @@
+[Title]
+RECIPE adding
+
+[Author]
+woojin
+
+[Likes]
+0
+
+[Ingredients]
+rice(1000g)
+
+[Instructions]
+1. 1. eat rice
+
+[Tags]
+
+[Comments]
+
+[Referenced Recipes]
+
+[Recipes Referencing This]
+
+[Unique Code]
+100009
