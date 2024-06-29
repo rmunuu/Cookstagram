@@ -34,6 +34,11 @@ void get_ingre_name(ingre_darray ingredients, darray *ingre_names);
 // string을 입력받아 key를 기준으로 분할하여 darray *array에 저장
 void split_string(darray *array, const char *string, char key); 
 
+void copy_darray(darray *, darray *);
+void get_mypage_code(darray *codes);
+void merge_darray(darray *total, darray *a, darray *b);
+
+
 
 // input to query
 // 입력된 텍스트 args를 받아 변환한 쿼리를 QUERY query에 저장
@@ -178,6 +183,85 @@ void split_string(darray *array, const char *string, char key)
     addto_darray(array, copy);
 }
 
+void get_mypage_code(darray *codes) 
+{
+    init_darray(codes);
+    char filename[MAX_LENGTH];
+    sprintf(filename, "../data/personal_info/%s.txt", id);
+
+    FILE *file = fopen(filename, "r");
+    if (!file)
+    {
+        perror("file open error");
+        getchar();
+        return;
+    }
+
+    char line[MAX_LENGTH];
+    int line_count = 0;
+    int total_lines = 0;
+
+    // 파일의 총 라인 수 계산
+    while (fgets(line, sizeof(line), file))
+    {
+        total_lines++;
+    }
+
+    rewind(file);
+
+    // 파일의 첫 두 줄을 건너뜁니다.
+    while (line_count < 2 && fgets(line, sizeof(line), file))
+    {
+        line_count++;
+    }
+
+    while (fgets(line, sizeof(line), file))
+    {
+        char code[MAX_LENGTH];
+        char *temp;
+        char string[MAX_LENGTH];
+
+        // 정수-문자열 형식으로 파싱합니다.
+        if (sscanf(line, "%s - %[^\n]", code, string) == 2)
+        {
+            temp = (char *)malloc(sizeof(string));
+            strcpy(temp, code);
+            addto_darray(codes, temp);
+        }
+        else
+        {
+            fprintf(stderr, "line %d parcing failed: %s", line_count + 1, line);
+        }
+        line_count++;
+    }
+
+    fclose(file);
+}
+
+void merge_darray(darray *total, darray *a, darray *b)
+{
+    init_darray(total);
+    int i, j;
+    int check = 0;
+    copy_darray(total, a);
+    for(i=0; i<b->count; i++) 
+    {
+        check = 0;
+        for(j=0; j<a->count; j++) 
+        {
+            if(strcmp(a->arr[j], b->arr[i])==0)
+            {
+                check = 1;
+                break;
+            }
+        }
+        if(!check)
+        {
+            addto_darray(total, b->arr[i]);
+        }
+    }
+}
+
 /*
 함수 설명: 
 public의 모든 레시피의 고유코드를 darray codes에 저장한다.
@@ -204,6 +288,7 @@ void get_full_code(darray *codes)
     {
         printf("Could not open public.txt\n");
     }
+
     fclose(file);
 }
 
@@ -565,6 +650,12 @@ void search() {
         darray full_code;
         darray *full_codes = &full_code;
 
+        darray mcode;
+        darray *mcodes = &mcode;
+
+        darray pcode;
+        darray *pcodes = &pcode;
+
         int *likes = NULL;
         int *tag_matches = NULL;
         int *ingredient_matches = NULL;
@@ -583,8 +674,10 @@ void search() {
             break;
         }
         split_args(query, buffer);
-        get_full_code(full_codes);
-        
+        get_full_code(pcodes);
+        get_mypage_code(mcodes);
+        merge_darray(full_codes, pcodes, mcodes);
+
         if (query->code) 
         {
             addto_darray(codes, query->code);

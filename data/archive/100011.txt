@@ -1,0 +1,25 @@
+[Title]
+Sehyun's pie
+
+[Author]
+woojin
+
+[Likes]
+0
+
+[Ingredients]
+rice(10g)
+
+[Instructions]
+1. 1. eat
+
+[Tags]
+
+[Comments]
+
+[Referenced Recipes]
+
+[Recipes Referencing This]
+
+[Unique Code]
+100011

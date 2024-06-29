@@ -5,13 +5,12 @@ Woojin's Sweet and Sour Chicken
 woojin
 
 [Likes]
-32
+33
 
 [Ingredients]
 chicken(300g), sugar(30g), vinegar(20g), garlic(10g), cooking oil(20g)
 
 [Instructions]
-
 1. Heat 20g of cooking oil in a pan.
 2. Add 300g of chicken and cook until lightly browned.
 3. Add 30g of sugar, 20g of vinegar, and 10g of minced garlic.
@@ -24,6 +23,8 @@ chicken, sugar, vinegar, garlic, sweet, sour, woojin, meal
 [Comments]
 Amazing taste!
 Kids loved it.
+hello
+asdf
 
 [Referenced Recipes]
 100002

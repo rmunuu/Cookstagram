@@ -11,7 +11,6 @@ woojin
 beef(200g), chili pepper(50g), garlic(10g), onion(50g), cooking oil(10g)
 
 [Instructions]
-
 1. Heat 10g of cooking oil in a pan.
 2. Add 200g of beef and stir-fry until brown.
 3. Add 50g of chopped chili pepper, 10g of minced garlic, and 50g of sliced onion.
